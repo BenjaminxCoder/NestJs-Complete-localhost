@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Product View Selector</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    button { margin-right: 10px; padding: 8px 14px; cursor: pointer; }
+    pre { margin-top: 20px; background: #f4f4f4; padding: 15px; border-radius: 6px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>Product View Selector</h1>
+  <button onclick="loadView('customer')">Load Customer View</button>
+  <button onclick="loadView('warehouse')">Load Warehouse View</button>
+  <pre id="output">Click a button to load data.</pre>
+
+  <script>
+    function loadView(viewType) {
+      const endpoint = `http://berrywalker.hopto.org/file-generated?view=${viewType}`;
+      fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          const formatted = JSON.stringify(data, null, 2);
+          document.getElementById("output").textContent = formatted;
+        })
+        .catch(error => {
+          document.getElementById("output").textContent = "Error: " + error.message;
+        });
+    }
+  </script>
+</body>
+</html>
