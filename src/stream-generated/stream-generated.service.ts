@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { TemporalSource, TemporalEvent } from './domain/temporal-source';
+import { NetworkTemporalSource } from './domain/network-temporal-source';
 
 @Injectable()
 export class StreamGeneratedService {
 
-  private source = new TemporalSource();
+  private source = new NetworkTemporalSource();
 
-  getCounterStream(): Observable<TemporalEvent> {
+  getCounterStream(): Observable<any> {
     return this.source.getStream();
   }
 }
